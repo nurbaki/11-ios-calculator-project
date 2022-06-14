@@ -117,11 +117,6 @@ document.querySelector(".decimal").onclick = ()=>{
 }
 
 
-
-
-
-
-
 // AC tusu, temizleme
 document.querySelector(".ac").onclick = ()=>{
     sayi1 = null;
@@ -144,6 +139,12 @@ document.querySelector(".percent").onclick = ()=>{
     islem = asilislem;
 }
 
+// - / + isareti
+
+document.querySelector(".pm").onclick = ()=>{
+    rakamlar = +(rakamlar) * (-1);
+    display1.innerHTML = rakamlar;
+}
 
 
 

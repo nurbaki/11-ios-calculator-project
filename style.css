@@ -29,7 +29,7 @@ body {
   height: 250px;
   width: 100%;
   text-align: right;
-  padding: 20px;
+  padding: 30px;
   font-size: 60px;
   display: flex;
   flex-direction: column;
@@ -38,6 +38,9 @@ body {
 .previous-display {
   opacity: 0.5;
   font-size: 30px;
+  overflow: hidden;
+}
+.current-display {
   overflow: hidden;
 }
 
