@@ -6,11 +6,13 @@ let sayi1;
 let sayi2;
 let sonuc;
 let islem;
-let nokta = true;
+let nokta = true; // rakam dizisi icinde nokta isareti olup olmadiginin kkontrolü icin
 console.log(sonuc);
 
+// rakamlar string seklinde her bir tusa bastikca olusuyor
+
 document.querySelector(".number-1").onclick = ()=>{
-    if (rakamlar == "0") {
+    if (rakamlar == "0") { // ekranda 01  gibi bir yazi cikmamasi icin, rakamdan once 0 olmasin 
         rakamlar = "1";
         display1.innerHTML = rakamlar;   
     }else {
@@ -95,19 +97,18 @@ document.querySelector(".number-0").onclick = ()=>{
 document.querySelector(".decimal").onclick = ()=>{
 
     if (rakamlar == null || rakamlar == "0") {
-        rakamlar = "0."
-        // rakamlar = rakamlar.toString();
+        rakamlar = "0." // ekran bosken noktaya basilirsa =
         nokta = false;
         display1.innerHTML = rakamlar;
         
     } else {
-        nokta = true;
+        nokta = true; // nokta ya her basista tum diziyi kontrol et,daha once nokta varsa bir daha ekleme
         for (const key in rakamlar) {
             if (rakamlar[key] == ".") {
                 nokta = false;
             }
         }
-        if (nokta){
+        if (nokta){ // hicbir problem yoksa rakamlar dizisine nokta isareti
            rakamlar += "."
            nokta = false;
            display1.innerHTML = rakamlar; 
@@ -134,7 +135,14 @@ document.querySelector(".ac").onclick = ()=>{
     display1.innerHTML = "0";
 }
 
+// Yüzde isareti
 
+document.querySelector(".percent").onclick = ()=>{
+    let asilislem = islem;
+    islem = "%";
+    hesapla();
+    islem = asilislem;
+}
 
 
 
@@ -149,12 +157,13 @@ document.querySelector(".addition").onclick = ()=>{
             display2.innerHTML = sayi1 + "+";
             rakamlar = "0"; 
         } else {
-            islem = "+";
             sayi2 = +(rakamlar);
-            sayi1 = sayi1 + sayi2;
+            hesapla();
+            // burda sayi1= sonuc artik,
             display2.innerHTML = sayi1 + "+";
-            display1.innerHTML = sayi1;
-            rakamlar = "0";             
+            islem = "+";
+            rakamlar = "0";
+            sonuc = null;             
         }   
     } else {
         islem = "+";
@@ -173,12 +182,13 @@ document.querySelector(".subtraction").onclick = ()=>{
             display2.innerHTML = sayi1 + "-";
             rakamlar = "0"; 
         } else {
-            islem = "-";
             sayi2 = +(rakamlar);
-            sayi1 = sayi1 - sayi2;
+            hesapla();
+            // burda sayi1= sonuc artik,
             display2.innerHTML = sayi1 + "-";
-            display1.innerHTML = sayi1;
-            rakamlar = "0";             
+            islem = "-";
+            rakamlar = "0";
+            sonuc = null;             
         }   
     } else {
         islem = "-";
@@ -198,12 +208,13 @@ document.querySelector(".multiplication").onclick = ()=>{
             display2.innerHTML = sayi1 + "*";
             rakamlar = "0"; 
         } else {
-            islem = "*";
             sayi2 = +(rakamlar);
-            sayi1 = sayi1 * sayi2;
+            hesapla();
+            // burda sayi1= sonuc artik,
             display2.innerHTML = sayi1 + "*";
-            display1.innerHTML = sayi1;
-            rakamlar = "0";             
+            islem = "*";
+            rakamlar = "0";
+            sonuc = null;             
         }   
     } else {
         islem = "*";
@@ -223,12 +234,13 @@ document.querySelector(".division").onclick = ()=>{
             display2.innerHTML = sayi1 + "/";
             rakamlar = "0"; 
         } else {
-            islem = "/";
             sayi2 = +(rakamlar);
-            sayi1 = sayi1 / sayi2;
+            hesapla();
+            // burda sayi1= sonuc artik,
             display2.innerHTML = sayi1 + "/";
-            display1.innerHTML = sayi1;
-            rakamlar = "0";             
+            islem = "/";
+            rakamlar = "0";
+            sonuc = null;            
         }   
     } else {
         islem = "/";
@@ -241,49 +253,47 @@ document.querySelector(".division").onclick = ()=>{
 
 
 
-
-
 document.querySelector(".equal").onclick = ()=>{
+
+    sayi2 = +(rakamlar);
+    display2.innerHTML = sayi1.toString() + islem + sayi2.toString() + "=";
+    hesapla();
+}
+
+
+
+
+const hesapla = () => {
 
     switch (islem) {
         case "+":
-            sayi2 = +(rakamlar);
-            display2.innerHTML = sayi1.toString() + islem + sayi2.toString() + "=";
             sonuc = sayi1 + sayi2;
             display1.innerHTML = sonuc;
-            sayi1 = sonuc;
-            rakamlar = "0";           
+            sayi1 = sonuc;         
             break;
 
         case "-":
-            sayi2 = +(rakamlar);
-            display2.innerHTML = sayi1.toString() + islem + sayi2.toString() + "=";
             sonuc = sayi1 - sayi2;
             display1.innerHTML = sonuc;
             sayi1 = sonuc;
-            // rakamlar = sayi2;
-            rakamlar = "0";  
             break;
 
-            case "*":
-                sayi2 = +(rakamlar);
-                display2.innerHTML = sayi1.toString() + islem + sayi2.toString() + "=";
-                sonuc = sayi1 * sayi2;
-                display1.innerHTML = sonuc;
-                sayi1 = sonuc;
-                // rakamlar = sayi2;
-                rakamlar = "0";  
-                break;
+        case "*":
+            sonuc = sayi1 * sayi2;
+            display1.innerHTML = sonuc;
+            sayi1 = sonuc;
+            break;
 
-                case "/":
-                    sayi2 = +(rakamlar);
-                    display2.innerHTML = sayi1.toString() + islem + sayi2.toString() + "=";
-                    sonuc = sayi1 / sayi2;
-                    display1.innerHTML = sonuc;
-                    sayi1 = sonuc;
-                    // rakamlar = sayi2;
-                    rakamlar = "0";  
-                    break;
+        case "/":
+            sonuc = sayi1 / sayi2;
+            display1.innerHTML = sonuc;
+            sayi1 = sonuc;
+            break;
+
+        case "%":
+            rakamlar = rakamlar / 100;
+            display1.innerHTML = rakamlar;
+            break;
     
         default:
             break;
